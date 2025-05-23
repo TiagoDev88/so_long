@@ -6,13 +6,11 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 10:13:33 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/23 23:30:29 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/24 00:14:55 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../includes/so_long.h"
-
-
 
 void	close_game(t_game *game)
 {
@@ -34,7 +32,6 @@ void	close_game(t_game *game)
 	exit(0);
 }
 
-
 static int	init_game(t_game *game, char *map_path)
 {
 	game->map = read_map(map_path);
@@ -55,16 +52,19 @@ static int	init_game(t_game *game, char *map_path)
 	mlx_hook(game->win, 2, KeyPressMask, handle_key, game);
 	mlx_hook(game->win, DestroyNotify, NoEventMask, handle_close, game);
 	mlx_loop(game->mlx);
-
 	return (1);
 }
 
 int	main(int argc, char **argv)
 {
 	t_game	game;
+	char *ext;
 
 	if (argc != 2)
 		return (print_error("Usage: ./so_long <maps/map.ber>\n"), 1);
+	ext = ft_strnstr(argv[1], ".ber", ft_strlen(argv[1]));
+	if (!ext || ext[4] != '\0')
+		return (print_error("Invalid map file extension. Use .ber\n"), 1);
 	if (!init_game(&game, argv[1]))
 		return (1);
 	mlx_loop(game.mlx);
