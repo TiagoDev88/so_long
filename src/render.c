@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:54:24 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/22 19:54:31 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/23 23:27:59 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,12 +19,19 @@ void	load_images(t_game *game)
 	game->img_player = mlx_xpm_file_to_image(game->mlx, "textures/player.xpm", &game->width, &game->height);
 	game->img_exit = mlx_xpm_file_to_image(game->mlx, "textures/exit.xpm", &game->width, &game->height);
 	game->img_coin = mlx_xpm_file_to_image(game->mlx, "textures/coin.xpm", &game->width, &game->height);
+	if (!game->img_wall || !game->img_floor || !game->img_player
+		|| !game->img_exit || !game->img_coin)
+	{
+		print_error("Failed to load one or more textures\n");
+		close_game(game);
+	}
 }
 
-void	render_tile(t_game *game, char c, int x, int y)
+void	render_pixel(t_game *game, char c, int x, int y)
 {
-	void	*img = NULL;
+	void	*img;
 
+	img = NULL;
 	if (c == '1')
 		img = game->img_wall;
 	else if (c == '0')
@@ -36,18 +43,21 @@ void	render_tile(t_game *game, char c, int x, int y)
 	else if (c == 'C')
 		img = game->img_coin;
 	if (img)
-		mlx_put_image_to_window(game->mlx, game->win, img, x * TILE_SIZE, y * TILE_SIZE);
+		mlx_put_image_to_window(game->mlx, game->win, img, x * PIXEL_SIZE, y * PIXEL_SIZE);
 }
 
 void	render_map(t_game *game)
 {
-	int y = 0;
+	int y;
+	int x;
+	
+	y = 0;
 	while (game->map[y])
 	{
-		int x = 0;
+		x = 0;
 		while (game->map[y][x])
 		{
-			render_tile(game, game->map[y][x], x, y);
+			render_pixel(game, game->map[y][x], x, y);
 			x++;
 		}
 		y++;

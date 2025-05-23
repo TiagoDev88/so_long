@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:49:05 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/22 19:43:13 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/23 22:53:22 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -63,14 +63,14 @@ int	required_elements(char **map)
 	int exit;
 	int collect;
 
-	i = 0;
+	i = -1;
 	player = 0;
 	exit = 0;
 	collect = 0;
-	while (map[i])
+	while (map[++i])
 	{
-		j = 0;
-		while (map[i][j])
+		j = -1;
+		while (map[i][++j])
 		{
 			if (map[i][j] == 'P')
 				player++;
@@ -78,9 +78,7 @@ int	required_elements(char **map)
 				exit++;
 			else if (map[i][j] == 'C')
 				collect++;
-			j++;
 		}
-		i++;
 	}
 	return (player == 1 && exit == 1 && collect >= 1);
 }

@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:19 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/22 20:04:16 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/23 23:22:04 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -22,7 +22,20 @@
 # include <string.h>
 # include <math.h>
 
-# define TILE_SIZE 32
+# include <X11/keysym.h>
+# include <X11/X.h>
+
+# define PIXEL_SIZE 32
+
+typedef struct s_player
+{
+	int		coins;
+	int		total_coins;
+	int		player_x;
+	int		player_y;
+	int		moves;
+}	t_player;
+
 
 typedef struct s_game
 {
@@ -36,22 +49,19 @@ typedef struct s_game
 	char	**map;
 	int		width;
 	int		height;
+	t_player	player;
 }	t_game;
 
-typedef struct s_map
-{
-	char	**grid;
-	int		rows;
-	int		cols;
-}	t_map;
 
 
 // /* ******************************* MAIN ************************************* */
+void close_game(t_game *game);
 
 
 /* ******************************* MAP ************************************** */
 char	**read_map(char *filename);
 void	free_map(char **map);
+int validate_map(char **map);
 
 /* **************************** MAP_UTILS *********************************** */
 int valid_elements(char **map);
@@ -59,15 +69,19 @@ int valid_rectangular(char **map);
 int required_elements(char **map);
 int required_full_walls(char **map);
 
-/* **************************** MAP_VALIDATE ******************************** */
-int validate_map(char **map);
-
 /* ******************************* UTILS ************************************ */
 int get_map_height(char **map);
+void print_error(char *msg);
+int handle_close(t_game *game);
 
 /* ****************************** RENDER ************************************ */
 void load_images(t_game *game);
-void render_tile(t_game *game, char c, int x, int y);
+void render_pixel(t_game *game, char c, int x, int y);
 void render_map(t_game *game);
+
+/* ****************************** PLAYER ************************************ */
+void	init_player(t_game *game);
+int		handle_key(int keycode, t_game *game);
+void	move_player(t_game *game, int dx, int dy);
 
 #endif
