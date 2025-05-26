@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 10:13:33 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/24 00:14:55 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:31:06 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
@@ -35,7 +35,7 @@ void	close_game(t_game *game)
 static int	init_game(t_game *game, char *map_path)
 {
 	game->map = read_map(map_path);
-	if (!validate_map(game->map))
+	if (!validate_map(game->map, map_path, game))
 		return (free_map(game->map), 0);
 	game->height = get_map_height(game->map);
 	game->width = ft_strlen(game->map[0]);
