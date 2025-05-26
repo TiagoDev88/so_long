@@ -1,5 +1,5 @@
 static char *wall_xpm[] = {
-"32 32 2 1",
+"64 64 2 1",
 " 	c #808080",
 "X	c #404040",
 "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",

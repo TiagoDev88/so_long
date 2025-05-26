@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:49:05 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/23 22:53:22 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/26 23:02:23 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -17,18 +17,18 @@ static int	is_valid_elements(char c)
 	return (c == '0' || c == '1' || c == 'C' || c == 'E' || c == 'P');
 }
 
-int	valid_elements(char **map)
+int	valid_elements(t_game *game)
 {
 	int i;
 	int	j;
 
 	i = 0;
-	while (map[i])
+	while (game->map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (game->map[i][j])
 		{
-			if (!is_valid_elements(map[i][j]))
+			if (!is_valid_elements(game->map[i][j]))
 				return (0);
 			j++;
 		}
@@ -37,75 +37,63 @@ int	valid_elements(char **map)
 	return (1);
 }
 
-int	valid_rectangular(char **map)
+int	valid_rectangular(t_game *game)
 {
 	int	i;
-	int	len;
 
 	i = 0;
-	if (!map || !map[0])
+	if (!game->map || !game->map[0])
 		return (0);
-	len = ft_strlen(map[0]);
-	while (map[i])
+	while (game->map[i])
 	{
-		if ((int)ft_strlen(map[i]) != len)
+		if ((int)ft_strlen(game->map[i]) != game->width)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	required_elements(char **map)
+int	required_elements(t_game *game)
 {
 	int	i;
 	int j;
-	int player;
-	int exit;
-	int collect;
 
-	i = -1;
-	player = 0;
-	exit = 0;
-	collect = 0;
-	while (map[++i])
+	i = 0;
+	while (i < game->height - 1)
 	{
-		j = -1;
-		while (map[i][++j])
+		j = 0;
+		while (j < game->width - 1)
 		{
-			if (map[i][j] == 'P')
-				player++;
-			else if (map[i][j] == 'E')
-				exit++;
-			else if (map[i][j] == 'C')
-				collect++;
+			if (game->map[i][j] == 'P')
+				game->is_player++;
+			else if (game->map[i][j] == 'E')
+				game->is_exit++;
+			else if (game->map[i][j] == 'C')
+				game->is_collect++;
+			j++;
 		}
+		i++;
 	}
-	return (player == 1 && exit == 1 && collect >= 1);
+	if (game->is_player != 1 || game->is_exit != 1 || game->is_collect < 1)
+		return (0);
+	return (1);
 }
 
-int	required_full_walls(char **map)
+int	required_full_walls(t_game *game)
 {
 	int	i;
-	int	width;
-	int	height;
 
 	i = 0;
-	width = ft_strlen(map[0]);
-	while (map[0][i])
-		if (map[0][i++] != '1') 
-			return (0);
-	i = 0;
-	while (map[i])
-		i++;
-	height = i;
-	i = 0;
-	while (map[height - 1][i])
-		if (map[height - 1][i++] != '1') 
-			return (0);
-	i = 0;
-	while (i < height)
+	while (i < game->width - 1)
 	{
-		if (map[i][0] != '1' || map[i][width - 1] != '1')
+		if (game->map[0][i] != '1' || game->map[game->height - 1][i] != '1')
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (i < game->height - 1)
+	{
+		if (game->map[i][0] != '1' || game->map[i][game->width - 1] != '1')
 			return (0);
 		i++;
 	}

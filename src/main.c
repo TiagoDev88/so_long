@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 10:13:33 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/26 13:31:06 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/26 22:57:11 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../includes/so_long.h"
 
@@ -32,13 +32,32 @@ void	close_game(t_game *game)
 	exit(0);
 }
 
+static void init_struct_game(t_game *game)
+{
+	game->mlx = NULL;
+	game->win= NULL;
+	game->img_wall = NULL;
+	game->img_floor = NULL;
+	game->img_player = NULL;
+	game->img_exit = NULL;
+	game->img_coin = NULL;
+	game->map = NULL;
+	game->temp_map = NULL;
+	game->is_collect = 0;
+	game->is_exit = 0;
+	game->is_player = 0;
+	game->width = 0;
+	game->height = 0;
+}
+
 static int	init_game(t_game *game, char *map_path)
 {
+	init_struct_game(game);
 	game->map = read_map(map_path);
-	if (!validate_map(game->map, map_path, game))
-		return (free_map(game->map), 0);
 	game->height = get_map_height(game->map);
 	game->width = ft_strlen(game->map[0]);
+	if (!validate_map(map_path, game))
+		return (free_map(game->map), 0);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (print_error("Failed to initialize MLX\n"), free_map(game->map), 0);
@@ -48,7 +67,7 @@ static int	init_game(t_game *game, char *map_path)
 		return (print_error("Failed to create window\n"), free_map(game->map), 0);
 	load_images(game);
 	render_map(game);
-	init_player(game);
+	init_player(game, game->map);
 	mlx_hook(game->win, 2, KeyPressMask, handle_key, game);
 	mlx_hook(game->win, DestroyNotify, NoEventMask, handle_close, game);
 	mlx_loop(game->mlx);

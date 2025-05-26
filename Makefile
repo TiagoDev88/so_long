@@ -6,7 +6,7 @@
 #    By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 13:05:44 by tfilipe-          #+#    #+#              #
-#    Updated: 2025/05/26 09:45:06 by tfilipe-         ###   ########.fr        #
+#    Updated: 2025/05/26 19:44:51 by tfilipe-         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -25,7 +25,7 @@ MLX_DIR = minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
 
 SRC_DIR = src
-SRCS = src/main.c src/map_utils.c src/map.c src/player.c src/render.c src/utils.c
+SRCS = src/main.c src/map_utils.c src/map.c src/player.c src/render.c src/utils.c src/check_map_path.c
 
 OBJS = $(SRCS:.c=.o)
 

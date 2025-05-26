@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:44:01 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/23 23:20:00 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/26 19:56:15 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -34,18 +34,18 @@ static int	count_total_coins(char **map)
 	return (count);
 }
 
-void	init_player(t_game *game)
+void	init_player(t_game *game, char **map)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	while (game->map[y])
+	while (map[y])
 	{
 		x = 0;
-		while (game->map[y][x])
+		while (map[y][x])
 		{
-			if (game->map[y][x] == 'P')
+			if (map[y][x] == 'P')
 			{
 				game->player.player_x = x;
 				game->player.player_y = y;
@@ -55,7 +55,7 @@ void	init_player(t_game *game)
 		y++;
 	}
 	game->player.coins = 0;
-	game->player.total_coins = count_total_coins(game->map);
+	game->player.total_coins = count_total_coins(map);
 	game->player.moves = 0;
 }
 
