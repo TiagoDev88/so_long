@@ -6,7 +6,7 @@
 #    By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/21 13:05:44 by tfilipe-          #+#    #+#              #
-#    Updated: 2025/05/26 19:44:51 by tfilipe-         ###   ########.fr        #
+#    Updated: 2025/05/27 16:28:09 by tfilipe-         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -46,7 +46,7 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
-	@echo "✅  $(NAME) compilado com sucesso!"
+	@echo "✅  $(NAME) Compiled successfully!"
 
 clean:
 	$(MAKE) clean -C $(LIBFT_DIR)
