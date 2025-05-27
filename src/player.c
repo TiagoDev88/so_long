@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
@@ -6,17 +6,17 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:44:01 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/26 19:56:15 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:22:25 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
 static int	count_total_coins(char **map)
 {
-	int x;
-	int y;
-	int count;
+	int	x;
+	int	y;
+	int	count;
 
 	y = 0;
 	count = 0;
@@ -59,7 +59,7 @@ void	init_player(t_game *game, char **map)
 	game->player.moves = 0;
 }
 
-static int check_next_pixel(t_game *game, int new_x, int new_y)
+static int	check_next_pixel(t_game *game, int new_x, int new_y)
 {
 	char	next;
 
@@ -75,7 +75,7 @@ static int check_next_pixel(t_game *game, int new_x, int new_y)
 	{
 		if (game->player.coins == game->player.total_coins)
 		{
-			ft_printf("Congratulations! You collected all the coins and left.\n");
+			ft_printf("Congratulations! You WON!\n");
 			close_game(game);
 		}
 		else
@@ -92,7 +92,7 @@ void	move_player(t_game *game, int dx, int dy)
 	new_x = game->player.player_x + dx;
 	new_y = game->player.player_y + dy;
 	if (!check_next_pixel(game, new_x, new_y))
-		return;
+		return ;
 	game->map[game->player.player_y][game->player.player_x] = '0';
 	game->map[new_y][new_x] = 'P';
 	game->player.player_x = new_x;
@@ -101,7 +101,6 @@ void	move_player(t_game *game, int dx, int dy)
 	ft_printf("Moves: %d\n", game->player.moves);
 	render_map(game);
 }
-
 
 int	handle_key(int keycode, t_game *game)
 {

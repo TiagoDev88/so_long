@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:49:05 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/26 23:02:23 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:17:57 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
@@ -19,7 +19,7 @@ static int	is_valid_elements(char c)
 
 int	valid_elements(t_game *game)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;
@@ -56,7 +56,7 @@ int	valid_rectangular(t_game *game)
 int	required_elements(t_game *game)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (i < game->height - 1)

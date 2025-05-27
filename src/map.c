@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:11:56 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/26 23:17:41 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:31:05 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
@@ -22,8 +22,10 @@ static char	*read_file(int fd)
 	content = ft_strdup("");
 	if (!content)
 		return (NULL);
-	while ((bytes = read(fd, buffer, 1024)) > 0)
+	bytes = 1;
+	while (bytes > 0)
 	{
+		bytes = read(fd, buffer, 1024);
 		buffer[bytes] = '\0';
 		tmp = content;
 		content = ft_strjoin(tmp, buffer);
@@ -32,7 +34,7 @@ static char	*read_file(int fd)
 			return (NULL);
 	}
 	if (bytes == -1)
-		return (free(content),NULL);
+		return (free(content), NULL);
 	return (content);
 }
 
@@ -74,10 +76,17 @@ int	validate_map(char *map_path, t_game *game)
 {
 	game->temp_map = read_map(map_path);
 	init_player(game, game->temp_map);
-	if (!check_path_accessibility(game))
+	if (!check_path_accessibility(game, 0))
 	{
 		free_map(game->temp_map);
 		return (print_error("The map cannot be completed! E or C locked\n"), 0);
+	}
+	free_map(game->temp_map);
+	game->temp_map = read_map(map_path);
+	if (!check_path_accessibility(game, 1))
+	{
+		free_map(game->temp_map);
+		return (print_error("The map cannot be completed! C locked\n"), 0);
 	}
 	free_map(game->temp_map);
 	if (!valid_rectangular(game))

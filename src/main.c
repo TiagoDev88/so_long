@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 10:13:33 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/26 22:57:11 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:17:25 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
@@ -32,10 +32,10 @@ void	close_game(t_game *game)
 	exit(0);
 }
 
-static void init_struct_game(t_game *game)
+static void	init_struct_game(t_game *game)
 {
 	game->mlx = NULL;
-	game->win= NULL;
+	game->win = NULL;
 	game->img_wall = NULL;
 	game->img_floor = NULL;
 	game->img_player = NULL;
@@ -60,11 +60,13 @@ static int	init_game(t_game *game, char *map_path)
 		return (free_map(game->map), 0);
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return (print_error("Failed to initialize MLX\n"), free_map(game->map), 0);
+		return (print_error("Failed to initialize MLX\n"),
+			free_map(game->map), 0);
 	game->win = mlx_new_window(game->mlx,
-		game->width * PIXEL_SIZE, game->height * PIXEL_SIZE, "so_long");
+			game->width * PIXEL_SIZE, game->height * PIXEL_SIZE, "so_long");
 	if (!game->win)
-		return (print_error("Failed to create window\n"), free_map(game->map), 0);
+		return (print_error("Failed to create window\n"),
+			free_map(game->map), 0);
 	load_images(game);
 	render_map(game);
 	init_player(game, game->map);
@@ -77,7 +79,7 @@ static int	init_game(t_game *game, char *map_path)
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	char *ext;
+	char	*ext;
 
 	if (argc != 2)
 		return (print_error("Usage: ./so_long <maps/map.ber>\n"), 1);
