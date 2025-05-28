@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 10:13:33 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/27 13:17:25 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:55:35 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ void	close_game(t_game *game)
 	exit(0);
 }
 
+static void	init_struct_player(t_player *player)
+{
+	player->coins = 0;
+	player->total_coins = 0;
+	player->player_x = 0;
+	player->player_y = 0;
+	player->moves = 0;
+}
+
 static void	init_struct_game(t_game *game)
 {
 	game->mlx = NULL;
@@ -53,6 +62,7 @@ static void	init_struct_game(t_game *game)
 static int	init_game(t_game *game, char *map_path)
 {
 	init_struct_game(game);
+	init_struct_player(&game->player);
 	game->map = read_map(map_path);
 	game->height = get_map_height(game->map);
 	game->width = ft_strlen(game->map[0]);

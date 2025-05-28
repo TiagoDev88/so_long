@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:11:56 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/27 13:31:05 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:22:39 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ int	validate_map(char *map_path, t_game *game)
 	if (!check_path_accessibility(game, 0))
 	{
 		free_map(game->temp_map);
-		return (print_error("The map cannot be completed! E or C locked\n"), 0);
+		return (print_error("Map cannot be completed! Elements locked\n"), 0);
 	}
 	free_map(game->temp_map);
 	game->temp_map = read_map(map_path);
 	if (!check_path_accessibility(game, 1))
 	{
 		free_map(game->temp_map);
-		return (print_error("The map cannot be completed! C locked\n"), 0);
+		return (print_error("Map cannot be completed! C locked\n"), 0);
 	}
 	free_map(game->temp_map);
 	if (!valid_rectangular(game))
