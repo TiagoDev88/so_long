@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 10:13:33 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/28 19:55:35 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:33:49 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
-void	close_game(t_game *game)
+void	close_game(t_game *game, int lose)
 {
+	if (lose)
+		ft_printf("You TOUCH THE ENEMY!\n L  O   S   E   R  !\n");
 	if (game->img_wall)
 		mlx_destroy_image(game->mlx, game->img_wall);
 	if (game->img_floor)
@@ -24,6 +26,8 @@ void	close_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->img_exit);
 	if (game->img_coin)
 		mlx_destroy_image(game->mlx, game->img_coin);
+	if (game->img_coin)
+		mlx_destroy_image(game->mlx, game->img_enemy);
 	free_map(game->map);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
@@ -50,11 +54,13 @@ static void	init_struct_game(t_game *game)
 	game->img_player = NULL;
 	game->img_exit = NULL;
 	game->img_coin = NULL;
+	game->img_enemy = NULL;
 	game->map = NULL;
 	game->temp_map = NULL;
 	game->is_collect = 0;
 	game->is_exit = 0;
 	game->is_player = 0;
+	game->is_enemy = 0;
 	game->width = 0;
 	game->height = 0;
 }
@@ -73,7 +79,7 @@ static int	init_game(t_game *game, char *map_path)
 		return (print_error("Failed to initialize MLX\n"),
 			free_map(game->map), 0);
 	game->win = mlx_new_window(game->mlx,
-			game->width * PIXEL_SIZE, game->height * PIXEL_SIZE, "so_long");
+			game->width * PIXEL_SIZE, (game->height + 1) * PIXEL_SIZE, "so_long");
 	if (!game->win)
 		return (print_error("Failed to create window\n"),
 			free_map(game->map), 0);

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   map_utils_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:49:05 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/27 13:17:57 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:52:25 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 static int	is_valid_elements(char c)
 {
-	return (c == '0' || c == '1' || c == 'C' || c == 'E' || c == 'P');
+	return (c == '0' || c == '1' || c == 'C' || c == 'E'
+		|| c == 'P' || c == 'X');
 }
 
 int	valid_elements(t_game *game)
@@ -70,11 +71,14 @@ int	required_elements(t_game *game)
 				game->is_exit++;
 			else if (game->map[i][j] == 'C')
 				game->is_collect++;
+			else if (game->map[i][j] == 'X')
+				game->is_enemy++;
 			j++;
 		}
 		i++;
 	}
-	if (game->is_player != 1 || game->is_exit != 1 || game->is_collect < 1)
+	if (game->is_player != 1 || game->is_exit != 1 || game->is_collect < 1
+		|| game->is_enemy < 1)
 		return (0);
 	return (1);
 }

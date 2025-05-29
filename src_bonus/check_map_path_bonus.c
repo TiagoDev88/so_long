@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_path.c                                   :+:      :+:    :+:   */
+/*   check_map_path_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:06:25 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/27 13:14:58 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:57:48 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 static int	can_move_to(char **map, int x, int y, int only_coin)
 {
 	if (only_coin == 1)
 	{
-		if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'E')
+		if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'E'
+			|| map[y][x] == 'X')
 			return (0);
 	}
-	else if (map[y][x] == '1' || map[y][x] == 'V')
+	else if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'X')
 		return (0);
 	return (1);
 }
