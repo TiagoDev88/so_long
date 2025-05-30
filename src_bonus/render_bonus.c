@@ -29,8 +29,7 @@ void	load_images(t_game *game)
 	if (!game->img_wall || !game->img_floor || !game->img_player
 		|| !game->img_exit || !game->img_coin || !game->img_enemy)
 	{
-		print_error("Failed to load one or more textures\n");
-		close_game(game, 0);
+		print_error(game, "Failed to load one or more textures\n");
 	}
 }
 
@@ -66,10 +65,7 @@ void	render_map(t_game *game)
 	free(game->player.str_moves);
 	game->player.str_moves = ft_itoa(game->player.moves);
 	if (!game->player.str_moves)
-	{
-		print_error("Str_moves not aloc\n");
-		close_game(game, 0);
-	}
+		print_error(game, "Str_moves not aloc\n");
 	y = 0;
 	while (game->map[y])
 	{

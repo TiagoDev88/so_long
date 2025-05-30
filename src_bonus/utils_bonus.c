@@ -22,10 +22,12 @@ int	get_map_height(char **map)
 	return (i);
 }
 
-void	print_error(char *msg)
+void	print_error(t_game *game, char *msg)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(msg, 2);
+	if (game)
+		close_game(game, 0);
 }
 
 int	handle_close(t_game *game)

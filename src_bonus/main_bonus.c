@@ -31,8 +31,11 @@ void	close_game(t_game *game, int lose)
 	free_map(game->map);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 	free(game->player.str_moves);
 	exit(0);
 }
@@ -80,13 +83,13 @@ static int	init_game(t_game *game, char *map_path)
 		return (free_map(game->map), 0);
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return (print_error("Failed to initialize MLX\n"),
+		return (print_error(game, "Failed to initialize MLX\n"),
 			free_map(game->map), 0);
 	game->win = mlx_new_window(game->mlx,
 			game->width * PIXEL_SIZE, (game->height + 1) * PIXEL_SIZE,
 			"so_long");
 	if (!game->win)
-		return (print_error("Failed to create window\n"),
+		return (print_error(game, "Failed to create window\n"),
 			free_map(game->map), 0);
 	load_images(game);
 	render_map(game);
@@ -103,10 +106,10 @@ int	main(int argc, char **argv)
 	char	*ext;
 
 	if (argc != 2)
-		return (print_error("Usage: ./so_long <maps/map.ber>\n"), 1);
+		return (print_error(NULL, "Usage: ./so_long <maps/map.ber>\n"), 1);
 	ext = ft_strnstr(argv[1], ".ber", ft_strlen(argv[1]));
 	if (!ext || ext[4] != '\0')
-		return (print_error("Invalid map file extension. Use .ber\n"), 1);
+		return (print_error(NULL, "Invalid map file extension. Use .ber\n"), 1);
 	if (!init_game(&game, argv[1]))
 		return (1);
 	mlx_loop(game.mlx);

@@ -73,7 +73,7 @@ int		required_elements(t_game *game);
 int		required_full_walls(t_game *game);
 /* ******************************* UTILS *********************************** */
 int		get_map_height(char **map);
-void	print_error(char *msg);
+void	print_error(t_game *game, char *msg);
 int		handle_close(t_game *game);
 /* ****************************** RENDER *********************************** */
 void	load_images(t_game *game);
