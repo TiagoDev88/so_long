@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:11:56 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/29 14:11:16 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:21:00 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	validate_map(char *map_path, t_game *game)
 	if (!valid_elements(game))
 		return (print_error("Map has invalid characters\n"), 0);
 	if (!required_elements(game))
-		return (print_error("Map must have 1 P, 1 E, >=1 C\n"), 0);
+		return (print_error("Map must have 1 P, >=1 X, 1 E, >=1 C\n"), 0);
 	if (!required_full_walls(game))
 		return (print_error("Map is not surrounded by walls\n"), 0);
 	game->temp_map = read_map(map_path);

@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 10:13:33 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/29 16:33:49 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:27:16 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	close_game(t_game *game, int lose)
 		mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
+	free(game->player.str_moves);
 	exit(0);
 }
 
@@ -43,6 +44,7 @@ static void	init_struct_player(t_player *player)
 	player->player_x = 0;
 	player->player_y = 0;
 	player->moves = 0;
+	player->str_moves = ft_strdup("0");
 }
 
 static void	init_struct_game(t_game *game)
@@ -63,6 +65,8 @@ static void	init_struct_game(t_game *game)
 	game->is_enemy = 0;
 	game->width = 0;
 	game->height = 0;
+	game->img_width = 0;
+	game->img_height = 0;
 }
 
 static int	init_game(t_game *game, char *map_path)
@@ -79,7 +83,8 @@ static int	init_game(t_game *game, char *map_path)
 		return (print_error("Failed to initialize MLX\n"),
 			free_map(game->map), 0);
 	game->win = mlx_new_window(game->mlx,
-			game->width * PIXEL_SIZE, (game->height + 1) * PIXEL_SIZE, "so_long");
+			game->width * PIXEL_SIZE, (game->height + 1) * PIXEL_SIZE,
+			"so_long");
 	if (!game->win)
 		return (print_error("Failed to create window\n"),
 			free_map(game->map), 0);

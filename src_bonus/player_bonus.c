@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:44:01 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/29 17:04:20 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:48:04 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,6 @@ void	move_player(t_game *game, int dx, int dy)
 {
 	int	new_x;
 	int	new_y;
-	char *moves;
-
-	moves = ft_itoa(game->player.moves);
 
 	new_x = game->player.player_x + dx;
 	new_y = game->player.player_y + dy;
@@ -108,9 +105,6 @@ void	move_player(t_game *game, int dx, int dy)
 	else if (dy > 0)
 		player_move_down(game, new_y, new_x);
 	ft_printf("Moves: %d\n", game->player.moves);
-	mlx_string_put(game->mlx, game->win, game->height, game->width + 1, 0xFFFFFF, moves);
-
-	//ft_print_moves(game);
 	render_map(game);
 }
 

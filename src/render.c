@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:54:24 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/27 13:05:43 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:06:09 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 void	load_images(t_game *game)
 {
+	int	width;
+	int	height;
+
 	game->img_wall = mlx_xpm_file_to_image(game->mlx, "textures/wall.xpm",
-			&game->width, &game->height);
+			&width, &height);
 	game->img_floor = mlx_xpm_file_to_image(game->mlx, "textures/floor.xpm",
-			&game->width, &game->height);
-	game->img_player = mlx_xpm_file_to_image(game->mlx, "textures/player.xpm",
-			&game->width, &game->height);
+			&width, &height);
+	game->img_player = mlx_xpm_file_to_image(game->mlx, "textures/p_down.xpm",
+			&width, &height);
 	game->img_exit = mlx_xpm_file_to_image(game->mlx, "textures/exit.xpm",
-			&game->width, &game->height);
+			&width, &height);
 	game->img_coin = mlx_xpm_file_to_image(game->mlx, "textures/coin.xpm",
-			&game->width, &game->height);
+			&width, &height);
 	if (!game->img_wall || !game->img_floor || !game->img_player
 		|| !game->img_exit || !game->img_coin)
 	{

@@ -6,7 +6,7 @@
 /*   By: tfilipe- <tfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:19 by tfilipe-          #+#    #+#             */
-/*   Updated: 2025/05/29 16:55:32 by tfilipe-         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:13:35 by tfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_player
 	int		player_x;
 	int		player_y;
 	int		moves;
+	char	*str_moves;
 }	t_player;
 
 typedef struct s_game
@@ -54,6 +55,8 @@ typedef struct s_game
 	int			is_enemy;
 	int			width;
 	int			height;
+	int			img_width;
+	int			img_height;
 	t_player	player;
 }	t_game;
 
@@ -76,7 +79,7 @@ int		handle_close(t_game *game);
 void	load_images(t_game *game);
 void	render_pixel(t_game *game, char c, int x, int y);
 void	render_map(t_game *game);
-void ft_print_moves(t_game *game);
+void	ft_print_moves(t_game *game);
 /* ****************************** PLAYER *********************************** */
 void	init_player(t_game *game, char **map);
 int		handle_key(int keycode, t_game *game);
@@ -84,8 +87,9 @@ void	move_player(t_game *game, int dx, int dy);
 /* **************************** check_map_path ***************************** */
 int		check_path_accessibility(t_game *game, int only_coin);
 
-void player_move_left(t_game *game, int new_y, int new_x);
-void player_move_right(t_game *game, int new_y, int new_x);
-void player_move_up(t_game *game, int new_y, int new_x);
-void player_move_down(t_game *game, int new_y, int new_x);
+/* ************************** player_move_bonus **************************** */
+void	player_move_left(t_game *game, int new_y, int new_x);
+void	player_move_right(t_game *game, int new_y, int new_x);
+void	player_move_up(t_game *game, int new_y, int new_x);
+void	player_move_down(t_game *game, int new_y, int new_x);
 #endif
