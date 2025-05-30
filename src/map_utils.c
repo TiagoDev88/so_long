@@ -40,13 +40,17 @@ int	valid_elements(t_game *game)
 int	valid_rectangular(t_game *game)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	if (!game->map || !game->map[0])
 		return (0);
 	while (game->map[i])
 	{
-		if ((int)ft_strlen(game->map[i]) != game->width)
+		j = 0;
+		while (game->map[i][j])
+			j++;
+		if (j != game->width)
 			return (0);
 		i++;
 	}
