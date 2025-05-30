@@ -98,6 +98,5 @@ int	main(int argc, char **argv)
 		return (print_error("Invalid map file extension. Use .ber\n"), 1);
 	if (!init_game(&game, argv[1]))
 		return (1);
-	mlx_loop(game.mlx);
 	return (0);
 }
