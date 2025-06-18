@@ -1,6 +1,8 @@
-<h1 align="center">
-	🍄 so_long - Super Mario Edition
-</h1>
+<h2 align="center">
+
+[![SO_LONG](https://github.com/TiagoDev88/42-project-badges/blob/main/badges/so_longm.png)](https://github.com/TiagoDev88/so_long) 
+
+</h2>
 
 <p align="center">
 	<b><i>2D Game Engine using minilibx</i></b><br>
